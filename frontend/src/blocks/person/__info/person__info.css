@@ -1,0 +1,28 @@
+.person__info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+@media (max-width: 720px) {
+  .person__info {
+    /* flex-direction: column; */
+    gap: 35px;
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 550px) {
+  .person__info {
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 380px) {
+  .person__info {
+    gap: 25px;
+  }
+}

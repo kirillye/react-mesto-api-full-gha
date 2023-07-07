@@ -1,0 +1,8 @@
+.person__box {
+}
+
+@media (max-width: 550px) {
+  .person__box {
+    text-align: center;
+  }
+}

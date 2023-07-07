@@ -1,0 +1,22 @@
+.person__btn-edit {
+  cursor: pointer;
+  background: url("../../../img/pen.svg") center center no-repeat;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  padding: 7px;
+  border: 1px solid #ffffff;
+  transition: all 0.25s linear;
+  margin-bottom: 7px;
+}
+
+.person__btn-edit:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 380px) {
+  .person__btn-edit {
+    height: 18px;
+    width: 18px;
+  }
+}

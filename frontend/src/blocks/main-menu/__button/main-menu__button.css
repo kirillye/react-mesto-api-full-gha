@@ -1,0 +1,16 @@
+.main-menu__button {
+  background: inherit;
+  color: #fff;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-decoration: none;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  transition: all 0.25s linear;
+}
+
+.main-menu__button:hover {
+  color: #a9a9a9;
+}

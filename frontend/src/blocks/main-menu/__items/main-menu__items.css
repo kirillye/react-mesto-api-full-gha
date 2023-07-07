@@ -1,0 +1,13 @@
+.main-menu__items {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .main-menu__items {
+    display: none;
+  }
+}

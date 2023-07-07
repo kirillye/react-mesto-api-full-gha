@@ -1,0 +1,6 @@
+.articles__image {
+  height: 282px;
+  width: 100%;
+  /* max-width: 282px; */
+  object-fit: cover;
+}

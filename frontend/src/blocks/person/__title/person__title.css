@@ -1,0 +1,22 @@
+.person__title {
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+  max-width: 300px;
+  margin: 0;
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media (max-width: 380px) {
+  .person__title {
+    text-align: center;
+    font-size: 27px;
+    line-height: 33px;
+    max-width: 200px;
+  }
+}

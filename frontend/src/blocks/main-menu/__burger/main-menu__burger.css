@@ -1,0 +1,14 @@
+.main-menu__burger {
+  position: relative;
+  display: none;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .main-menu__burger {
+    display: flex;
+  }
+}

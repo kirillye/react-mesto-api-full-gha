@@ -1,0 +1,12 @@
+.main-menu__item-link {
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-decoration: none;
+  transition: all 0.25s linear;
+}
+
+.main-menu__item-link:hover {
+  color: #a9a9a9;
+}

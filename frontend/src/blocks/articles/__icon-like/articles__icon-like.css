@@ -1,0 +1,13 @@
+.articles__icon-like {
+  background-color: inherit;
+  border: none;
+  background: url("../../../img/like.svg") center center no-repeat;
+  transition: all 0.25s linear;
+  height: 22px;
+  width: 22px;
+  cursor: pointer;
+}
+
+.articles__icon-like:hover {
+  opacity: 0.5;
+}

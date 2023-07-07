@@ -1,0 +1,23 @@
+.popup__input {
+  width: 100%;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.25s linear;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000;
+  padding-bottom: 13px;
+}
+
+.popup__input:hover,
+.popup__input:focus,
+.popup__input:active {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+/* .popup__input:not(:last-child) {
+  margin-bottom: 30px;
+} */

@@ -1,0 +1,6 @@
+.mobile-menu_active {
+  /* display: flex; */
+  opacity: 1;
+  padding: 40px 0;
+  height: 100%;
+}

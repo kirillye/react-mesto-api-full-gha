@@ -1,0 +1,25 @@
+.person__image-cover {
+  position: relative;
+  z-index: 1;
+}
+
+.person__image-cover:hover {
+  cursor: pointer;
+}
+
+.person__image-cover:before {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  background: no-repeat center center url("../../../img/pen.svg");
+  background-size: 0px 0px;
+  transition: all linear 0.25s;
+}
+
+.person__image-cover:hover::before {
+  /* background: rgba(0, 0, 0, 0.8); */
+  background-size: 26px 26px;
+  background-color: rgba(0, 0, 0, 0.8);
+}

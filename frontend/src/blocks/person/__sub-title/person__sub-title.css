@@ -1,0 +1,20 @@
+.person__sub-title {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  margin: 16px 0 0 0;
+  max-width: 350px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media (max-width: 380px) {
+  .person__sub-title {
+    text-align: center;
+    max-width: 200px;
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

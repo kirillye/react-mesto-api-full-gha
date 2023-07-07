@@ -1,0 +1,13 @@
+.login__redirect {
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #ffffff;
+  background: inherit;
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  margin: 15px auto 0;
+}

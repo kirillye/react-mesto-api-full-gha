@@ -1,0 +1,16 @@
+.articles__icon-trush {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  background: url("../../../img/trash.svg") center center no-repeat;
+  transition: all 0.25s linear;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  border: none;
+}
+
+.articles__icon-trush:hover {
+  opacity: 0.6;
+}

@@ -1,0 +1,20 @@
+.person__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+  gap: 25px;
+}
+
+@media (max-width: 720px) {
+  .person__wrapper {
+    flex-direction: column;
+    gap: 35px;
+  }
+}
+
+@media (max-width: 380px) {
+  .person__wrapper {
+    margin-bottom: 36px;
+  }
+}

@@ -1,0 +1,10 @@
+.mobile-menu {
+  overflow: hidden;
+  height: 0;
+  display: flex;
+  opacity: 0;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all 0.25s linear;
+}

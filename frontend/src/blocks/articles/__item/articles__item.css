@@ -1,0 +1,6 @@
+.articles__item {
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}

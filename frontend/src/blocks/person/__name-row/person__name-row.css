@@ -1,0 +1,11 @@
+.person__name-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+}
+
+@media (max-width: 380px) {
+  .person__name-row {
+    gap: 10px;
+  }
+}

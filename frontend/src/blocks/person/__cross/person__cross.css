@@ -1,0 +1,21 @@
+.person__cross {
+  /* visibility: hidden; */
+  /* width: 32px;
+  height: 32px;
+  opacity: 0.3; */
+  position: relative;
+}
+
+.person__cross:before,
+.person__cross:after {
+  position: absolute;
+  left: 15px;
+  content: " ";
+  height: 33px;
+  width: 2px;
+  background-color: #fff;
+}
+
+.person__cross:before {
+  transform: rotate(-90deg);
+}
