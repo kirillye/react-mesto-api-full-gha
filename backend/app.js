@@ -1,4 +1,5 @@
 const { PORT = 4000, MONGO_URL = "mongodb://localhost:27017" } = process.env;
+
 const express = require("express");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
@@ -9,7 +10,7 @@ const app = express();
 const cors = require("cors");
 
 app.use(cookieParser());
-app.use(express.static("public"));
+// app.use(express.static("public"));
 // parse application/json
 app.use(express.json());
 app.use(
