@@ -16,8 +16,11 @@ module.exports = (req, res, next) => {
 
   try {
     payload = jwt.verify(token, JWT_SECRET);
+    console.log(payload);
   } catch (err) {
-    return next(new AuthError("Необходимо авторизоваться"));
+    return next(
+      new AuthError("Необходимо авторизоваться или куки не были распарсены")
+    );
   }
 
   req.user = payload; // записываем пейлоуд в объект запроса

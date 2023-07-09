@@ -7,6 +7,7 @@ const {
   getUsersById,
   createUsers,
   login,
+  signOut,
   updateUserById,
   updateUserAvatarById,
   // deleteUserById,
@@ -62,6 +63,9 @@ router.post(
   }),
   login
 );
+
+// разлогинирование
+router.post("/signout", signOut);
 
 // обновляет профиль
 router.patch(

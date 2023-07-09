@@ -22,36 +22,71 @@ import Spinner from "./Spinner.js";
 import InfoTooltip from "./InfoTooltip";
 
 function App() {
-  const [cards, setCards] = useState([]);
+  // попапы
   const [isEditAvatarPopupOpen, openEditAvatar] = useState(false);
   const [isEditProfilePopupOpen, openEditProfile] = useState(false);
   const [isAddPlacePopupOpen, openAddPlace] = useState(false);
   const [isImagePopupOpen, openImagePopup] = useState(false);
   const [isAcceptPopupOpen, openAcceptPopup] = useState(false);
   const [isNotificationPupupOpen, setIsNotificationPupupOpen] = useState(false);
+
+  // информция из бд
   const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
+
+  // авторизация
   const [loggedIn, setLoggedIn] = useState(false);
-  const [userData, setUserData] = useState({
-    email: "",
-  });
+  const [email, setEmail] = useState("");
+
+  // работа с карточками
   const [currentCardDelete, setCurrentCardDelete] = useState({});
   const [selectedCard, setSelectCard] = useState({ name: "", link: "" });
+
+  // загрузка
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingForm, setIsLoadingForm] = useState(false);
+
+  // собираем ошибки
   const [regStatus, setRegStatus] = useState({
     messageError: "",
     isError: true,
   });
+
+  //
   const httpRegex =
     /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/;
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setIsLoading(true);
+    tokenCheck();
+    if (loggedIn) {
+      Promise.all([api.getUserInfo(), api.getCards()])
+        .then(([userData, cards]) => {
+          const { user } = userData;
+          handleCardsChange(cards);
+          setCurrentUser(user);
+        })
+        .catch((err) => console.error(err))
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   function handleCardsChange(data) {
-    setCards(data);
+    setCards(data.reverse());
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api
       .changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
@@ -87,7 +122,7 @@ function App() {
       .sendUserInfo(data)
       .then((data) => {
         closeAllPopups();
-        setCurrentUser(data);
+        setCurrentUser(data.user);
       })
       .catch((err) => console.error(err))
       .finally(() => {
@@ -101,7 +136,7 @@ function App() {
       .sendUserAvatar(data)
       .then((data) => {
         closeAllPopups();
-        setCurrentUser((state) => ({ ...state, avatar: data.avatar }));
+        setCurrentUser((state) => ({ ...state, avatar: data.user.avatar }));
       })
       .catch((err) => console.error(err))
       .finally(() => {
@@ -160,37 +195,43 @@ function App() {
   //  ============ Функции авторизации/актуализации данных пользователя  ============
 
   const tokenCheck = () => {
-    if (localStorage.getItem("jwt")) {
-      const jwt = localStorage.getItem("jwt");
-      authentication
-        .tokenCheck(jwt)
-        .then((res) => {
-          if (res) {
-            setUserData({
-              email: res.data.email,
-            });
-            setLoggedIn(true);
-            navigate("/", { replace: true });
-          }
-        })
-        .catch((err) => console.log(err));
-    }
+    authentication
+      .tokenCheck()
+      .then((res) => {
+        if (res) {
+          setLoggedIn(true);
+          navigate("/", { replace: true });
+        } else {
+          setLoggedIn(false);
+        }
+      })
+      .catch((err) => {
+        setLoggedIn(false);
+        console.log(`Произошла ${err}: ${err.massage}`);
+      });
   };
 
   const handleLogOut = () => {
-    setUserData({
-      email: "",
-    });
-    setLoggedIn(false);
-    localStorage.removeItem("jwt");
-    navigate("/sign-in");
+    authentication
+      .signOut()
+      .then((res) => {
+        if (res) {
+          setLoggedIn(false);
+          localStorage.removeItem("email", email);
+          navigate("/sign-in");
+        } else {
+          console.log(`Не успешная попытка выйтию... Попробуйте, чуть позже.`);
+        }
+      })
+      .catch((err) => {
+        console.log(`Произошла ${err}: ${err.massage}`);
+      });
   };
 
   const handleRegister = ({ userEmail, userPassword }) => {
     return authentication
       .signUp(userEmail, userPassword)
       .then((res) => {
-        localStorage.setItem("token", res.data._id);
         setRegStatus({
           messageError: "",
           isError: false,
@@ -215,17 +256,12 @@ function App() {
     return authentication
       .signIn(userEmail, userPassword)
       .then((res) => {
-        if (res.token) {
-          localStorage.setItem("jwt", res.token);
-          setLoggedIn(true);
-          setUserData({
-            email: userEmail,
-          });
-          navigate("/", { replace: true });
-        }
+        setLoggedIn(true);
+        localStorage.setItem("email", userEmail);
+        setEmail(userEmail);
+        navigate("/", { replace: true });
       })
       .catch((err) => {
-        console.log(err);
         return err;
       });
   };
@@ -281,31 +317,13 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    setIsLoading(true);
-    tokenCheck();
-    Promise.all([api.getUserInfo(), api.getCards()])
-      .then(([userData, cards]) => {
-        handleCardsChange(cards);
-        setCurrentUser(userData);
-      })
-      .catch((err) => console.error(err))
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
-
-  if (isLoading) {
-    return <Spinner />;
-  }
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Header
         logo={mainLogo}
         loggedIn={loggedIn}
         handleLogOut={handleLogOut}
-        userData={userData}
+        email={email}
       />
       <Routes>
         <Route

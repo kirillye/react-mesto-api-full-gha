@@ -21,6 +21,12 @@ export default function Login({ handleLogin }) {
     e.preventDefault();
     handleLogin(formValue)
       .then((res) => {
+        if (typeof res && res?.includes("логин")) {
+          return setErrorMessage("Логин или пароль не верен");
+        }
+        if (typeof res && res?.includes("пароль")) {
+          return setErrorMessage("Логин или пароль не верен");
+        }
         if (typeof res && res?.includes("Ошибка")) {
           return;
         }

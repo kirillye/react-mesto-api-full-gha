@@ -9,6 +9,9 @@ class Authentication {
   }
 
   _getResponseData(res) {
+    if (res.statusText === "Unauthorized") {
+      return Promise.reject(`Ошибка: Не правильный логин или пароль`);
+    }
     if (!res.ok) {
       return Promise.reject(`Ошибка: ${res.status}`);
     }
@@ -19,6 +22,7 @@ class Authentication {
     return this._request("signup", {
       method: "POST",
       headers: this.headers,
+      credentials: "include",
       body: JSON.stringify({
         password: userPassword,
         email: userEmail,
@@ -30,6 +34,7 @@ class Authentication {
     return this._request("signin", {
       method: "POST",
       headers: this.headers,
+      credentials: "include",
       body: JSON.stringify({
         password: userPassword,
         email: userEmail,
@@ -37,19 +42,27 @@ class Authentication {
     });
   }
 
-  tokenCheck(token) {
+  signOut() {
+    return this._request("signout", {
+      method: "POST",
+      headers: this.headers,
+      credentials: "include",
+    });
+  }
+
+  tokenCheck() {
     return fetch(`${this.url}users/me`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
+      credentials: "include",
     }).then(this._getResponseData);
   }
 }
 
 export const authentication = new Authentication({
-  url: "https://auth.nomoreparties.co/",
+  url: "http://localhost:4000/",
   headers: {
     "Content-Type": "application/json",
   },

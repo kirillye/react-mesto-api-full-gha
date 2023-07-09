@@ -73,7 +73,6 @@ const login = (req, res, next) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = generateToken(user);
-
       // отправка токена в ответе
       // return res.send({token})
 
@@ -82,9 +81,18 @@ const login = (req, res, next) => {
         .cookie("jwt", token, {
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
+          sameSite: true,
         })
         .send({ message: "Авторизация прошла успешна!" });
     })
+    .catch(next);
+};
+
+const signOut = (req, res, next) => {
+  return res
+    .clearCookie("jwt")
+    .status(200)
+    .send({ message: "Пользователь успешно вышел с сайта" })
     .catch(next);
 };
 
@@ -101,7 +109,7 @@ const updateUserById = (req, res, next) => {
       if (!user) {
         throw new NotFound("Пользователь не найден");
       }
-      return res.status(200).send({ data: user });
+      return res.status(200).send({ user });
     })
     .catch((err) => {
       if (err.name == "ValidationError") {
@@ -134,7 +142,7 @@ const updateUserAvatarById = (req, res, next) => {
       if (!user) {
         throw new NotFound(`Пользователь не найден`);
       }
-      return res.status(200).send({ data: user });
+      return res.status(200).send({ user });
     })
     .catch((err) => {
       if (err.name == "ValidationError") {
@@ -159,6 +167,7 @@ module.exports = {
   getUsersById,
   createUsers,
   login,
+  signOut,
   updateUserById,
   updateUserAvatarById,
   // deleteUserById,

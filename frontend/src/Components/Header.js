@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Menu from "./Menu";
 
-function Header({ logo, loggedIn, handleLogOut, userData }) {
+function Header({ logo, loggedIn, handleLogOut, email }) {
   const [isActiveMenuMobile, setIsActiveMenuMobile] = useState(false);
   function handleClickBurger() {
     setIsActiveMenuMobile((current) => !current);
@@ -13,20 +13,16 @@ function Header({ logo, loggedIn, handleLogOut, userData }) {
         handleClickMenu={handleClickBurger}
         elementClass={"mobile-menu"}
         isActiveMenuMobile={isActiveMenuMobile}
-        userData={userData}
         loggedIn={loggedIn}
         handleLogOut={handleLogOut}
+        email={email}
       />
       <header className="header">
         <div className="header__up">
           <a href="#root" onClick={(e) => e.preventDefault()}>
             <img src={logo} alt="Логотип" className="logo" />
           </a>
-          <Menu
-            userData={userData}
-            loggedIn={loggedIn}
-            handleLogOut={handleLogOut}
-          />
+          <Menu loggedIn={loggedIn} handleLogOut={handleLogOut} />
           <label
             className={`main-menu__burger ${
               isActiveMenuMobile ? "main-menu__burger_active" : ""

@@ -1,17 +1,15 @@
 import React from "react";
-import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 export default function Menu({
   handleClickMenu,
   isActiveMenuMobile = false,
   elementClass = "",
-  userData,
   loggedIn,
   handleLogOut,
 }) {
   const location = useLocation();
-  const email = userData.email;
+  const email = "";
 
   function signOut() {
     handleLogOut();
@@ -48,13 +46,16 @@ export default function Menu({
             )}
           </>
         )}
-        {email.length > 2 && (
+        <li className="main-menu__item">
+          <span>{email || localStorage.getItem("email")}</span>
+        </li>
+        {/* {email.length > 2 && (
           <li className="main-menu__item">
             <a href={`mailto:${email}`} className="main-menu__item-link">
               {email}
             </a>
           </li>
-        )}
+        )} */}
         {loggedIn === true && (
           <li className="main-menu__item" onClick={signOut}>
             <button

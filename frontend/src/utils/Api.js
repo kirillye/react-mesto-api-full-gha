@@ -18,12 +18,14 @@ class Api {
   getCards() {
     return this._request("cards", {
       headers: this.headers,
+      credentials: "include",
     });
   }
 
   getUserInfo() {
     return this._request("users/me", {
       headers: this.headers,
+      credentials: "include",
     });
   }
 
@@ -31,6 +33,7 @@ class Api {
     return this._request("cards", {
       method: "POST",
       headers: this.headers,
+      credentials: "include",
       body: JSON.stringify({
         name: articleTitle,
         link: linkImage,
@@ -43,11 +46,13 @@ class Api {
       return this._request(`cards/${id}/likes`, {
         method: "DELETE",
         headers: this.headers,
+        credentials: "include",
       });
     } else {
       return this._request(`cards/${id}/likes`, {
         method: "PUT",
         headers: this.headers,
+        credentials: "include",
       });
     }
   }
@@ -56,6 +61,7 @@ class Api {
     return this._request(`cards/${id}`, {
       method: "DELETE",
       headers: this.headers,
+      credentials: "include",
     });
   }
 
@@ -63,6 +69,7 @@ class Api {
     return this._request("users/me", {
       method: "PATCH",
       headers: this.headers,
+      credentials: "include",
       body: JSON.stringify({
         name: data.name,
         about: data.about,
@@ -74,6 +81,7 @@ class Api {
     return this._request("users/me/avatar", {
       method: "PATCH",
       headers: this.headers,
+      credentials: "include",
       body: JSON.stringify({
         avatar: avatar,
       }),
@@ -82,7 +90,7 @@ class Api {
 }
 
 export const api = new Api({
-  url: "https://mesto.nomoreparties.co/v1/cohort-63/",
+  url: "http://localhost:4000/",
   headers: {
     authorization: "329c4ea8-6d08-414a-aa1f-2a25b10eec2c",
     "Content-Type": "application/json",
