@@ -22,7 +22,6 @@ class Authentication {
     return this._request("signup", {
       method: "POST",
       headers: this.headers,
-      credentials: "include",
       body: JSON.stringify({
         password: userPassword,
         email: userEmail,
@@ -34,7 +33,6 @@ class Authentication {
     return this._request("signin", {
       method: "POST",
       headers: this.headers,
-      credentials: "include",
       body: JSON.stringify({
         password: userPassword,
         email: userEmail,
@@ -46,7 +44,6 @@ class Authentication {
     return this._request("signout", {
       method: "POST",
       headers: this.headers,
-      credentials: "include",
     });
   }
 
@@ -56,7 +53,6 @@ class Authentication {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
     }).then(this._getResponseData);
   }
 }
