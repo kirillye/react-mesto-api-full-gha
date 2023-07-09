@@ -1,4 +1,4 @@
-const { PORT = 4000 } = process.env;
+const { PORT = 4000, MONGO_URL = "mongodb://localhost:27017" } = process.env;
 const express = require("express");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
@@ -23,7 +23,7 @@ const routes = require("./routes");
 const mongoose = require("mongoose");
 
 mongoose
-  .connect("mongodb://localhost:27017/database", {
+  .connect(`${MONGO_URL}/database`, {
     useNewUrlParser: true,
   })
   .then(() => {
