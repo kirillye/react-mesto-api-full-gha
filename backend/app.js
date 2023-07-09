@@ -8,7 +8,8 @@ const errorHandler = require("./middlewares/errorHandler");
 const logErrors = require("./middlewares/logErrors");
 const { errors } = require("celebrate");
 const app = express();
-const cors = require("./middlewares/cors");
+const cors = require("cors");
+const configCors = require("./util/params/configCors");
 
 app.use(cookieParser());
 // app.use(express.static("public"));
@@ -29,7 +30,7 @@ mongoose
     console.log("error conected to db");
   });
 
-app.use(cors);
+app.use(cors(configCors));
 app.use(routes);
 app.use(errors());
 app.use(logErrors);
