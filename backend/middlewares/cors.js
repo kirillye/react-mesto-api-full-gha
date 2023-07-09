@@ -1,4 +1,11 @@
-const allowedCors = require("../util/params/allowCors");
+const allowedCors = [
+  "htts://mesto.kirill.nomoredomains.work",
+  "http://mesto.kirill.nomoredomains.work",
+  "http://api.mesto.kirill.nomoredomains.work",
+  "https://api.mesto.kirill.nomoredomains.work",
+  "http://localhost:3000",
+  "https://localhost:3000",
+];
 
 module.exports = (req, res, next) => {
   const { origin } = req.headers;
