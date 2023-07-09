@@ -90,7 +90,7 @@ class Api {
 }
 
 export const api = new Api({
-  url: "http://localhost:4000/",
+  url: "http://api.mesto.kirill.nomoredomains.work/",
   headers: {
     authorization: "329c4ea8-6d08-414a-aa1f-2a25b10eec2c",
     "Content-Type": "application/json",

@@ -1,4 +1,4 @@
-const { PORT = 4000, MONGO_URL = "mongodb://localhost:27017" } = process.env;
+const { PORT = 3000, MONGO_URL = "mongodb://localhost:27017" } = process.env;
 
 const express = require("express");
 require("dotenv").config();
@@ -7,24 +7,19 @@ const errorHandler = require("./middlewares/errorHandler");
 const logErrors = require("./middlewares/logErrors");
 const { errors } = require("celebrate");
 const app = express();
-const cors = require("cors");
+const cors = require("./middlewares/cors");
 
 app.use(cookieParser());
 // app.use(express.static("public"));
 // parse application/json
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  })
-);
+app.use(cors);
 
 const routes = require("./routes");
 const mongoose = require("mongoose");
 
 mongoose
-  .connect(`${MONGO_URL}/database`, {
+  .connect(`mongodb://127.0.0.1:27017/database`, {
     useNewUrlParser: true,
   })
   .then(() => {

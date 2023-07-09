@@ -62,7 +62,7 @@ class Authentication {
 }
 
 export const authentication = new Authentication({
-  url: "http://localhost:4000/",
+  url: "http://api.mesto.kirill.nomoredomains.work/",
   headers: {
     "Content-Type": "application/json",
   },
