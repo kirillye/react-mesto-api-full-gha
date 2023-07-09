@@ -2,7 +2,7 @@ const configCors = {
   origin: [
     "http://mesto.kirill.nomoredomains.work",
     "htts://mesto.kirill.nomoredomains.work",
-    "htts://api.mesto.kirill.nomoredomains.work",
+    "http://api.mesto.kirill.nomoredomains.work",
     "htts://api.mesto.kirill.nomoredomains.work",
     "http://localhost:3000",
   ],

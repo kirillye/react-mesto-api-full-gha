@@ -90,7 +90,7 @@ class Api {
 }
 
 export const api = new Api({
-  url: "http://api.mesto.kirill.nomoredomains.work/",
+  url: "https://api.mesto.kirill.nomoredomains.work/",
   headers: {
     "Content-Type": "application/json",
   },
