@@ -6,7 +6,7 @@ const configCors = {
     "htts://api.mesto.kirill.nomoredomains.work",
     "http://localhost:3000",
   ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 };
