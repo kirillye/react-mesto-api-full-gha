@@ -7,6 +7,12 @@ const NotFound = require("../errors/not-found-error");
 router.get("/", function (req, res) {
   res.send("hello world");
 });
+
+router.get("/crash-test", function (req, res) {
+  setTimeout(() => {
+    throw new Error("Сервер сейчас упадёт");
+  }, 0);
+});
 router.use("", userRoutes);
 router.use("/cards", cardRoutes);
 

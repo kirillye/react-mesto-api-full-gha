@@ -9,7 +9,6 @@ const logErrors = require("./middlewares/logErrors");
 const { errors } = require("celebrate");
 const app = express();
 const cors = require("./middlewares/cors");
-const configCors = require("./util/params/configCors");
 
 app.use(cors);
 
