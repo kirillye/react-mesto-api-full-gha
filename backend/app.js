@@ -15,7 +15,6 @@ const cors = require("cors");
 app.use(cookieParser());
 app.use(express.json());
 // app.use(cors);
-app.use(cors());
 
 mongoose
   .connect(`mongodb://127.0.0.1:27017/database`, {
@@ -28,11 +27,12 @@ mongoose
     console.log("error conected to db");
   });
 
-app.use(routes);
-app.use(errors());
 app.use(logErrors);
 app.use(reqLogger);
+app.use(cors());
+app.use(routes);
 app.use(errLogger);
+app.use(errors());
 app.use(errorHandler);
 
 app.listen(PORT, () => {
