@@ -35,6 +35,13 @@ router.get(
   getUsersById
 );
 
+// краш-тест
+router.get("/crash-test", () => {
+  setTimeout(() => {
+    throw new Error("Сервер сейчас упадёт");
+  }, 0);
+});
+
 // создание пользователя
 router.post(
   "/signup",
