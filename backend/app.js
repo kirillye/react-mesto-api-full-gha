@@ -8,11 +8,13 @@ const { errors } = require("celebrate");
 const app = express();
 const routes = require("./routes");
 const mongoose = require("mongoose");
-const cors = require("./middlewares/cors");
+// const cors = require("./middlewares/cors");
+const cors = require("cors");
 
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors);
+// app.use(cors);
+app.use(cors());
 
 mongoose
   .connect(`mongodb://127.0.0.1:27017/database`, {
