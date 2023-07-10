@@ -1,23 +1,18 @@
 require("dotenv").config();
-
 const { PORT = 3000, MONGO_URL = "mongodb://localhost:27017" } = process.env;
-
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const errorHandler = require("./middlewares/errorHandler");
 const logErrors = require("./middlewares/logErrors");
 const { errors } = require("celebrate");
 const app = express();
-const cors = require("cors");
-
-app.use(cors({ origin: true, credentials: true }));
-
-app.use(cookieParser());
-
-app.use(express.json());
-
 const routes = require("./routes");
 const mongoose = require("mongoose");
+const cors = require("./middlewares/cors");
+
+app.use(cookieParser());
+app.use(express.json());
+app.use(cors);
 
 mongoose
   .connect(`mongodb://127.0.0.1:27017/database`, {
