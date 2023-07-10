@@ -9,11 +9,12 @@ const { reqLogger, errLogger } = require("./middlewares/log");
 const app = express();
 const routes = require("./routes");
 const mongoose = require("mongoose");
-const cors = require("./middlewares/cors");
-// const cors = require("cors");
+// const cors = require("./middlewares/cors");
+const cors = require("cors");
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors({ origin: true, credentials: true }));
 
 mongoose
   .connect(`mongodb://127.0.0.1:27017/database`, {
@@ -28,7 +29,6 @@ mongoose
 
 app.use(logErrors);
 app.use(reqLogger);
-app.use(cors);
 app.use(routes);
 app.use(errLogger);
 app.use(errors());
