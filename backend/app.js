@@ -5,14 +5,17 @@ const cookieParser = require("cookie-parser");
 const errorHandler = require("./middlewares/errorHandler");
 const logErrors = require("./middlewares/logErrors");
 const { errors } = require("celebrate");
+const { reqLogger, errLogger } = require("./middlewares/log");
 const app = express();
 const routes = require("./routes");
 const mongoose = require("mongoose");
-const cors = require("./middlewares/cors");
+// const cors = require("./middlewares/cors");
+const cors = require("cors");
 
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors);
+// app.use(cors);
+app.use(cors());
 
 mongoose
   .connect(`mongodb://127.0.0.1:27017/database`, {
@@ -28,6 +31,8 @@ mongoose
 app.use(routes);
 app.use(errors());
 app.use(logErrors);
+app.use(reqLogger);
+app.use(errLogger);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
