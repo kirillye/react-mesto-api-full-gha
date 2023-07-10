@@ -8,9 +8,9 @@ const errorHandler = require("./middlewares/errorHandler");
 const logErrors = require("./middlewares/logErrors");
 const { errors } = require("celebrate");
 const app = express();
-const cors = require("./middlewares/cors");
+const cors = require("cors");
 
-app.use(cors);
+app.use(cors({ origin: true, credentials: true }));
 
 app.use(cookieParser());
 
