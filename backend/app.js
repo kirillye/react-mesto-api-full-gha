@@ -29,6 +29,12 @@ mongoose
 
 app.use(logErrors);
 app.use(reqLogger);
+app.get("/crash-test", () => {
+  setTimeout(() => {
+    throw new Error("Сервер сейчас упадёт");
+  }, 0);
+});
+
 app.use(routes);
 app.use(errLogger);
 app.use(errors());
