@@ -9,7 +9,6 @@ const { reqLogger, errLogger } = require("./middlewares/log");
 const app = express();
 const routes = require("./routes");
 const mongoose = require("mongoose");
-// const cors = require("./middlewares/cors");
 const cors = require("cors");
 
 app.use(cookieParser());
